@@ -1,0 +1,21 @@
+.navbar{
+    color: white;
+}
+.darkTextarea{
+background-color: black;
+color: white;
+}
+.lightTextarea{
+    background-color: white;
+    border: 1px solid black;
+}
+.darkbtn{
+background-color: black;
+border: 1px solid white;
+color: white;
+}
+.lightbtn{
+    background-color: white;
+    border: 1px solid black;
+}
+
