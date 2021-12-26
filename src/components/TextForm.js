@@ -21,9 +21,7 @@ export default function TextForm(props) {
   };
   // Handle the click on copy text button
   const handleCopy = () => {
-    var text = document.getElementById("myBox");
-    text.select();
-    navigator.clipboard.writeText(text.value);
+    navigator.clipboard.writeText(text);
     props.showAlert("Text Copied" , "success")
   };
   const handleExtraSpaces = () => {
@@ -34,7 +32,7 @@ export default function TextForm(props) {
 
   // Characters Define
   const [text, setText] = useState("");
-  var characterWithoutSpace = text.replace(/ /g, "");
+  var characterWithoutSpace = text.replace(/\s+/g, "");
 
   return (
     <>
@@ -50,27 +48,27 @@ export default function TextForm(props) {
             rows="8"
           ></textarea>
         </div>
-        <button className={`btn ${props.mode === "light" ? "lightbtn" : "darkbtn"} `} onClick={handleUpClick}>
+        <button disabled={text.length === 0}  className={`btn ${props.mode === "light" ? "lightbtn" : "darkbtn"} mx-2 my-2 `} onClick={handleUpClick}>
           Convert To UpperCase
         </button>
-        <button className={`btn ${props.mode === "light" ? "lightbtn" : "darkbtn"} mx-2`} onClick={handleLoClick}>
+        <button disabled={text.length === 0}  className={`btn ${props.mode === "light" ? "lightbtn" : "darkbtn"} mx-2 my-2`} onClick={handleLoClick}>
           Convert To LowerCase
         </button>
-        <button className={`btn ${props.mode === "light" ? "lightbtn" : "darkbtn"} mx-2`} onClick={handleExtraSpaces}>
+        <button disabled={text.length === 0}  className={`btn ${props.mode === "light" ? "lightbtn" : "darkbtn"} mx-2 my-2`} onClick={handleExtraSpaces}>
           Remove Extra Spaces
         </button>
-        <button className={`btn ${props.mode === "light" ? "lightbtn" : "darkbtn"} mx-2`} onClick={handleCopy}>
+        <button disabled={text.length === 0}  className={`btn ${props.mode === "light" ? "lightbtn" : "darkbtn"} mx-2 my-2`} onClick={handleCopy}>
           Copy Text
         </button>
       </div>
       <div className="container my-3">
         <h2>Your Text Summary</h2>
         <p>
-          {text.split(" ").length} Words and {characterWithoutSpace.length}{" "}
+          {text.split(/\s+/).filter((element)=>{return element.length !== 0}).length} Words and {characterWithoutSpace.length}{" "}
           Characters
         </p>
        
-        <p>{0.008 * text.split(" ").length} Minutes Read</p>
+        <p>{0.008 * text.split(/\s+/).filter((element)=>{return element.length !== 0}).length} Minutes Read</p>
         <h2>Preview</h2>
         <p>{text.length>0?text:"Nothing to show, Enter text above"}</p>
       </div>
